@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw0v5fgqe64xy"]
+
+[ext_resource type="Script" path="res://turret/turret.gd" id="1_4hyem"]
+[ext_resource type="Texture2D" uid="uid://c266y3ts86ijf" path="res://assets/towerDefense_tile181.png" id="1_44uuq"]
+[ext_resource type="Texture2D" uid="uid://cwr64dvwo4rk7" path="res://assets/towerDefense_tile249.png" id="2_72cye"]
+[ext_resource type="Script" path="res://components/target_component.gd" id="3_oa3mg"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="5_kv2ho"]
+[ext_resource type="PackedScene" uid="uid://c3elsiayjdukn" path="res://projectile/projectile.tscn" id="6_ga8cw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mmrgu"]
+radius = 1572.62
+
+[node name="Turret" type="Node2D"]
+rotation = 1.5708
+script = ExtResource("1_4hyem")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_44uuq")
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_72cye")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mmrgu")
+debug_color = Color(0, 0.6, 0.701961, 0.172549)
+
+[node name="TargetComponent" type="Node" parent="." node_paths=PackedStringArray("target_area")]
+script = ExtResource("3_oa3mg")
+target_area = NodePath("../Area2D")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+rotation = -4.08232
+script = ExtResource("5_kv2ho")
+scene = ExtResource("6_ga8cw")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.5

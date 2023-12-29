@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://djcfl6nmgefun"]
+
+[ext_resource type="PackedScene" uid="uid://dw0v5fgqe64xy" path="res://turret/turret.tscn" id="1_yheys"]
+[ext_resource type="PackedScene" uid="uid://burbhlms0omvr" path="res://creep/creep.tscn" id="2_o3qva"]
+
+[node name="World" type="Node2D"]
+position = Vector2(11, 51)
+
+[node name="Turret" parent="." instance=ExtResource("1_yheys")]
+position = Vector2(1172, 721)
+
+[node name="Creep" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(1698, 518)
+
+[node name="Creep2" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(1859, 1267)
+
+[node name="Creep3" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(1353, 724)
+
+[node name="Creep4" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(1384, 1007)
+
+[node name="Creep5" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(1474, 1191)
+
+[node name="Creep6" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(2317, 402)
+
+[node name="Creep7" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(2478, 1151)
+
+[node name="Creep8" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(1972, 608)
+
+[node name="Creep9" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(2003, 891)
+
+[node name="Creep10" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(2093, 1075)
+
+[node name="Creep14" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(258, 340)
+
+[node name="Creep15" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(419, 1089)
+
+[node name="Creep16" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(-87, 546)
+
+[node name="Creep17" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(-56, 829)
+
+[node name="Creep18" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(34, 1013)

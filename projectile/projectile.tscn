@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3elsiayjdukn"]
+
+[ext_resource type="Script" path="res://components/move_component.gd" id="1_8ta3f"]
+[ext_resource type="Script" path="res://projectile/projectile.gd" id="1_dgl2g"]
+[ext_resource type="Texture2D" uid="uid://dsb6yp4omxap4" path="res://assets/towerDefense_tile251.png" id="1_rih63"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="2_lx11k"]
+[ext_resource type="Script" path="res://components/move_stats.gd" id="5_danvq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6g1k2"]
+radius = 12.0
+height = 70.0
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_dgl2g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_rih63")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("1_8ta3f")
+actor = NodePath("..")
+speed = 100
+drag_factor = 1.5
+
+[node name="MoveStats" type="Node" parent="."]
+script = ExtResource("5_danvq")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("2_lx11k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6g1k2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
