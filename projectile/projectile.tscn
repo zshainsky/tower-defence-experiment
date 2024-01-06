@@ -17,14 +17,14 @@ script = ExtResource("1_dgl2g")
 rotation = 1.5708
 texture = ExtResource("1_rih63")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "move_stats")]
 script = ExtResource("1_8ta3f")
 actor = NodePath("..")
-speed = 100
-drag_factor = 1.5
+move_stats = NodePath("../MoveStats")
 
 [node name="MoveStats" type="Node" parent="."]
 script = ExtResource("5_danvq")
+speed = 50.0
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_mask = 2

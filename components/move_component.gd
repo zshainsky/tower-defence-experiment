@@ -2,28 +2,22 @@ class_name MoveComponent
 extends Node
 
 @export var actor: Node2D
-@export var velocity: Vector2
-@export var speed = 30
-@export var drag_factor = 1.1
+@export var move_stats: MoveStats
 
-var acceleration = Vector2.ZERO
-
-func _physics_process(delta) -> void:
-	var direction = Vector2.RIGHT.rotated(actor.rotation).normalized()
-	if actor is Projectile:
-		var projectile: Projectile = actor as Projectile
-		if projectile.target != null:
-			direction = projectile.global_position.direction_to(projectile.target.global_position)
-		
-		var desired_velocity = direction * speed
-		var change = (desired_velocity - velocity) * drag_factor
-		velocity += change
-		
-		projectile.position += velocity * delta
-		projectile.look_at(projectile.global_position + velocity)
-		
-		#actor.look_at(actor.target.global_position)
-		#actor.position = actor.position.move_toward(actor.target.global_position, speed * delta)
-		return
+func _process(delta: float) -> void:
+	update_sprite_direction()
+	move(delta)
 	
-	actor.position += speed * direction * delta
+func move(delta: float) -> void:
+	move_stats.velocity += move_stats.acceleration
+	move_stats.velocity = move_stats.velocity.limit_length(move_stats.max_speed)
+	actor.global_position += move_stats.velocity * move_stats.speed * delta 
+
+func update_sprite_direction() -> void:
+	if actor is Projectile:
+		var projectile: Projectile = actor
+		var rotation: float = move_stats.velocity.angle() + deg_to_rad(90)
+		projectile.sprite_2d.global_rotation = rotation
+		projectile.collision_shape_2d.global_rotation = rotation
+
+

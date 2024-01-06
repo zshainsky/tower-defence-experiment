@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cwr64dvwo4rk7" path="res://assets/towerDefense_tile249.png" id="2_72cye"]
 [ext_resource type="Script" path="res://components/target_component.gd" id="3_oa3mg"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="5_kv2ho"]
-[ext_resource type="PackedScene" uid="uid://c3elsiayjdukn" path="res://projectile/projectile.tscn" id="6_ga8cw"]
+[ext_resource type="PackedScene" uid="uid://b1tc63e2awlpo" path="res://projectile/homing_projectile.tscn" id="6_n36ek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mmrgu"]
-radius = 1572.62
+radius = 837.406
 
 [node name="Turret" type="Node2D"]
 rotation = 1.5708
@@ -34,7 +34,7 @@ target_area = NodePath("../Area2D")
 [node name="SpawnerComponent" type="Node2D" parent="."]
 rotation = -4.08232
 script = ExtResource("5_kv2ho")
-scene = ExtResource("6_ga8cw")
+scene = ExtResource("6_n36ek")
 
 [node name="FireTimer" type="Timer" parent="."]
 wait_time = 0.5

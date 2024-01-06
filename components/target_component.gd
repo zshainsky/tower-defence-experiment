@@ -23,7 +23,6 @@ func _creep_detected(area: Area2D) -> void:
 		
 		if self.creep == null or self.creep != creep:
 			self.creep = creep
-			creep.stats_component.no_health.connect(_find_first_creep)
 			target_creep_updated.emit()
 
 func _creep_exited(area: Area2D) -> void:

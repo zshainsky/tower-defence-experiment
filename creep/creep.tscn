@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://burbhlms0omvr"]
+[gd_scene load_steps=11 format=3 uid="uid://burbhlms0omvr"]
 
 [ext_resource type="Script" path="res://creep/creep.gd" id="1_c10lr"]
 [ext_resource type="Texture2D" uid="uid://b1ntoo1whaq1t" path="res://assets/towerDefense_vector.svg" id="1_fhyd1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="4_0dg2o"]
 [ext_resource type="Script" path="res://components/hurt_component.gd" id="5_jwy25"]
 [ext_resource type="Script" path="res://components/stats_component.gd" id="6_vse3m"]
+[ext_resource type="Script" path="res://components/move_stats.gd" id="7_7o7md"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75mi6"]
 atlas = ExtResource("1_fhyd1")
@@ -48,7 +49,11 @@ hurtbox_compoennt = NodePath("../HurtboxComponent")
 [node name="StatsComponent" type="Node" parent="."]
 script = ExtResource("6_vse3m")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "move_stats")]
 script = ExtResource("2_3hltc")
 actor = NodePath("..")
-velocity = Vector2(200, 0)
+move_stats = NodePath("../MoveStats")
+
+[node name="MoveStats" type="Node" parent="."]
+script = ExtResource("7_7o7md")
+speed = 150.0

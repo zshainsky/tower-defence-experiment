@@ -7,6 +7,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if spawner_component.scene == null:
+		spawner_component.scene = load("res://projectile/homing_projectile.tscn")
 	spawner_component.global_position = gun_sprite.global_position
 	target_component.target_creep_updated.connect(track_creep)
 	fire_timer.timeout.connect(fire_projectile)
@@ -28,10 +30,7 @@ func track_creep() -> void:
 		fire_timer.stop()
 
 func fire_projectile() -> void:
-	var spawn: Node2D = spawner_component.spawn_node2d(spawner_component.global_position) as Node2D
-	if spawn is Projectile:
-		var projectile: Projectile = spawn as Projectile
-		projectile.target = target_component.creep
+	spawner_component.spawn_projectile(target_component.creep, spawner_component.global_position) as Projectile
 
 func angle_to_creep(creep: Creep, from_node: Node2D) -> float:
 	var angle = 0
