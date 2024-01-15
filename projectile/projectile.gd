@@ -17,3 +17,5 @@ func _ready():
 	lifetime_timer.timeout.connect(queue_free)
 	
 	move_stats.velocity = (target.global_position - self.global_position).normalized() * move_stats.speed
+	
+	

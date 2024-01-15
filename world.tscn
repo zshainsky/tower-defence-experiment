@@ -29,3 +29,6 @@ position = Vector2(110, 1014)
 
 [node name="Creep7" parent="." instance=ExtResource("2_o3qva")]
 position = Vector2(-1033, 109)
+
+[node name="Creep8" parent="." instance=ExtResource("2_o3qva")]
+position = Vector2(85, 481)

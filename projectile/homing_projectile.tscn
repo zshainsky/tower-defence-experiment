@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1tc63e2awlpo"]
+[gd_scene load_steps=5 format=3 uid="uid://b1tc63e2awlpo"]
 
 [ext_resource type="PackedScene" uid="uid://c3elsiayjdukn" path="res://projectile/projectile.tscn" id="1_6bb1a"]
 [ext_resource type="Script" path="res://components/homing_move_component.gd" id="2_60j7d"]
 [ext_resource type="Script" path="res://components/homing_move_stats.gd" id="3_frvej"]
+[ext_resource type="Script" path="res://components/draw_vectors_component.gd" id="4_tevub"]
 
 [node name="HomingProjectile" instance=ExtResource("1_6bb1a")]
 
-[node name="MoveComponent" parent="." index="1"]
+[node name="MoveComponent" parent="." index="2"]
 script = ExtResource("2_60j7d")
 max_force = 0.75
 
-[node name="MoveStats" parent="." index="2"]
+[node name="MoveStats" parent="." index="3"]
 script = ExtResource("3_frvej")
 max_force = 0.75
 speed = 200.0
+
+[node name="DrawVectorsComponent" type="Node2D" parent="." index="6" node_paths=PackedStringArray("move_component")]
+visible = false
+script = ExtResource("4_tevub")
+move_component = NodePath("../MoveComponent")

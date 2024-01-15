@@ -32,12 +32,25 @@ func spawn_projectile(target: Node2D, global_spawn_position: Vector2 = global_po
 	assert(scene is PackedScene, "Error: The scene export was never set on this spawner component.")
 	var projectile = scene.instantiate() as Projectile
 		
-	projectile.global_position = global_spawn_position
+	projectile.position = global_spawn_position
+	projectile.z_index = parent.z_index - 1
 	if target != null:
 		projectile.target = target
 		
 	assert(projectile is Projectile, "Error: The instance for this spawner must extend Node2D")
-	parent.add_child(projectile)
+	add_child(projectile)
 
 	return projectile
+	
+	
+#func spawn_projectile() -> void:
+	#var scene: PackedScene = load("res://projectile/projectile.tscn")
+	#var projectile = scene.instantiate() as Projectile
+	#projectile.position = muzzle_marker.position
+	#projectile.z_index = self.z_index - 1
+	#if target_component.creep != null:
+		#projectile.target = target_component.creep
+	#
+	#add_child(projectile)
+	#scale_component.tween_scale()
 	

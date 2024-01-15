@@ -14,8 +14,8 @@ func _ready() -> void:
 	target_area.area_exited.connect(_creep_exited)
 	
 func _process(delta) -> void:
-	#_find_rand_creep()
-	pass
+	if creep == null:
+		_find_rand_creep()
 
 func _creep_detected(area: Area2D) -> void:
 	if area.get_parent() is Creep:
@@ -36,12 +36,13 @@ func _find_first_creep() -> void:
 	_find_creep(0)
 
 func _find_rand_creep() -> void:
-	var min = 0
-	var max = len(target_area.get_overlapping_areas()) - 1
-	_find_creep(randi_range(min, max))
+	if target_area.has_overlapping_areas():
+		var min = 0
+		var max = max(len(target_area.get_overlapping_areas()) - 1, 0)
+		_find_creep(randi_range(min, max))
 	
 func _find_creep(loc: int) -> void:
-	if self.creep == null and target_area.has_overlapping_areas() and len(target_area.get_overlapping_areas()) >= loc:
+	if self.creep == null and target_area.has_overlapping_areas() and len(target_area.get_overlapping_areas()) > loc:
 		var new_area: Area2D = target_area.get_overlapping_areas()[loc] as Area2D
 		if new_area.get_parent() is Creep:
 			var creep: Creep = new_area.get_parent() as Creep

@@ -1,21 +1,52 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3elsiayjdukn"]
+[gd_scene load_steps=11 format=3 uid="uid://c3elsiayjdukn"]
 
 [ext_resource type="Script" path="res://components/move_component.gd" id="1_8ta3f"]
 [ext_resource type="Script" path="res://projectile/projectile.gd" id="1_dgl2g"]
 [ext_resource type="Texture2D" uid="uid://dsb6yp4omxap4" path="res://assets/towerDefense_tile251.png" id="1_rih63"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="2_lx11k"]
+[ext_resource type="Texture2D" uid="uid://b81cbt6y8cvp6" path="res://assets/towerDefense_tilesheet.png" id="3_sx14d"]
 [ext_resource type="Script" path="res://components/move_stats.gd" id="5_danvq"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkucx"]
+atlas = ExtResource("3_sx14d")
+region = Rect2(1216, 768, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8axas"]
+atlas = ExtResource("3_sx14d")
+region = Rect2(1280, 768, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4n17j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkucx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8axas")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6g1k2"]
-radius = 12.0
-height = 70.0
+radius = 16.0
+height = 74.0
 
 [node name="Projectile" type="Node2D"]
+scale = Vector2(1.25, 1.25)
 script = ExtResource("1_dgl2g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("1_rih63")
+
+[node name="JetAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-49, 1)
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_4n17j")
+autoplay = "default"
+frame_progress = 0.610934
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "move_stats")]
 script = ExtResource("1_8ta3f")
@@ -24,17 +55,22 @@ move_stats = NodePath("../MoveStats")
 
 [node name="MoveStats" type="Node" parent="."]
 script = ExtResource("5_danvq")
-speed = 50.0
+speed = 30.0
 
 [node name="HitboxComponent" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 script = ExtResource("2_lx11k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6g1k2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(9.53674e-07, 0)
+scale = Vector2(2.7, 1)
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 10.0
